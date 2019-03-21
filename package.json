@@ -1,27 +1,18 @@
 {
-  "name": "stevetube",
+  "name": "wetube",
   "version": "1.0.0",
-  "description": "Cloning youtube",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hyunjaesung/stevetubeclone-fullstack.git"
-  },
-  "author": "Steve Hyunjae Sung",
+  "description": "Cloning Youtube with Vanilla and NodeJS",
+  "author": "Nicolás Serrano Arévalo",
   "dependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
     "express": "^4.16.4"
   },
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "nodemon --exec babel-node index.js"
   },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hyunjaesung/stevetubeclone-fullstack/issues"
-  },
-  "homepage": "https://github.com/hyunjaesung/stevetubeclone-fullstack#readme",
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.4.1"
+    "nodemon": "^1.18.6"
   }
 }
