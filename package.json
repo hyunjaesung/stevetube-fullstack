@@ -1,0 +1,19 @@
+{
+  "name": "stevetube",
+  "version": "1.0.0",
+  "description": "Cloning youtube",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyunjaesung/stevetubeclone-fullstack.git"
+  },
+  "author": "Steve Hyunjae Sung",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyunjaesung/stevetubeclone-fullstack/issues"
+  },
+  "homepage": "https://github.com/hyunjaesung/stevetubeclone-fullstack#readme"
+}
