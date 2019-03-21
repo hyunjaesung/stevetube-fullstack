@@ -11,6 +11,9 @@
   "dependencies": {
     "express": "^4.16.4"
   },
+  "scripts": {
+    "start": "node index.js"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hyunjaesung/stevetubeclone-fullstack/issues"
