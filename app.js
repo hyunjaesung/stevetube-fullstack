@@ -17,7 +17,7 @@ app.use(morgan("dev")); // 옵션있음
 app.use(helmet());
 
 app.use("/", globalRouter); //글로벌 라우터 /join /login /home /search 등을 다룸
-app.use(routes.users, userRouter);
+app.use(routes.videos, userRouter);
 app.use(routes.videos, videoRouter);
 
 export default app; // 누군가 내 파일을 불러오면 이 object를 주겠다는의미
