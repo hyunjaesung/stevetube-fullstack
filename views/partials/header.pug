@@ -1,9 +1,12 @@
 header.header
     div.header__coloumn
-        <i class="fab fa-youtube"></i>
+        a(href=routes.home)
+            <i class="fab fa-youtube"></i>
+            //- pug 방법으로 표현하면 i.fab.fa-youtube
     div.header__coloumn
         ul
             li
-                a(href="#") Join
+                a(href=routes.join) Join
             li
-                a(href="#") Log In
+                a(href=routes.login) Log In
+            
