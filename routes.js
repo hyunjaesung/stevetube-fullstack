@@ -23,7 +23,7 @@ const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDED = "/:id/delete";
 
-const routes = {
+export const routes = {
   home: HOME,
   join: JOIN,
   login: LOGIN,

@@ -3,6 +3,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import { localsMiddleware } from "./middleware";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
@@ -15,8 +16,10 @@ app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json()); // 옵션있음, 어떤 방식으로 다룰지
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(morgan("dev")); // 옵션있음
+
+app.use(localsMiddleware);
+
 app.use("/", globalRouter); //글로벌 라우터 /join /login /home /search 등을 다룸
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
