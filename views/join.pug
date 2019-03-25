@@ -1,8 +1,8 @@
 extends layouts/main.pug 
 
 block content
-    .form__container
-        form(action = "/login", method = "post")
+    .form-container
+        form(action = routes.join, method = "post")
             //- 비밀로 두기 위해 post
             input(type="text", name="name", placehoder ="Full Name")
             input(type="email", name="email", placehoder="Email")
