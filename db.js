@@ -4,7 +4,8 @@ export const videos = [
     title: "VideoAwesome",
     description: "This is video",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 1212,
       name: "Steve",
@@ -15,8 +16,9 @@ export const videos = [
     id: 333394,
     title: "Videog",
     description: "This is video",
-    views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    views: 234,
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 1212,
       name: "Steve",
@@ -27,8 +29,9 @@ export const videos = [
     id: 4444234,
     title: "Videoh",
     description: "This is video",
-    views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    views: 434,
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 1212,
       name: "Steve",

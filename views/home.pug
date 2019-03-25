@@ -1,8 +1,13 @@
 extends layouts/main.pug 
+include mixins/videoBlock
 
 block content
     .videos
         each video in videos
-            h1= video.title
-            
+            +videoBlock({
+                title : video.title,
+                views : video.views,
+                videoFile : video.videoFile
+            })
+            //- mixin함수안의 키값에 맞게 값을 전달해줌
         
