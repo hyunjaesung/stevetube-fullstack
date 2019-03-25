@@ -4,7 +4,7 @@ block content
     .form-container
         form(action = routes.login, method = "post")
             //- 비밀로 두기 위해 post
-            input(type="email", name="email", placehoder="Email")
-            input(type="password", name="password", placehoder="Password")
+            input(type="email", name="email", placehoder="Email", require=true)
+            input(type="password", name="password", placehoder="Password", require=true)
             input(type="submit", value = "Log In")
         include partials/socialLogin

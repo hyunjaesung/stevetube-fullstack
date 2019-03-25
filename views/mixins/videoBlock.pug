@@ -1,6 +1,7 @@
 mixin videoBlock(item = {}) 
     .videoBlock
-        video.videoBlock__thumnail(src=item.videoFile, controls = true)
-        //- controls = true 해야지 재생버튼생김
-        h4.videoBlock__title=item.title
-        h6.videoBlcok__views=item.views
+        a(href =routes.videoDetail(item.id))
+            video.videoBlock__thumnail(src=item.videoFile, controls = true)
+            //- controls = true 해야지 재생버튼생김
+            h4.videoBlock__title=item.title
+            h6.videoBlcok__views=item.views
