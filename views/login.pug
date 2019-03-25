@@ -1,4 +1,10 @@
 extends layouts/main.pug 
 
 block content
-    p Login
+    .form__container
+        form(action = "/login", method = "post")
+            //- 비밀로 두기 위해 post
+            input(type="email", name="email", placehoder="Email")
+            input(type="password", name="password", placehoder="Password")
+            input(type="submit", value = "Log In")
+        include partials/socialLogin

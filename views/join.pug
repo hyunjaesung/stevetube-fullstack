@@ -1,4 +1,12 @@
 extends layouts/main.pug 
 
 block content
-    p Join
+    .form__container
+        form(action = "/login", method = "post")
+            //- 비밀로 두기 위해 post
+            input(type="text", name="name", placehoder ="Full Name")
+            input(type="email", name="email", placehoder="Email")
+            input(type="password", name="password", placehoder="Password")
+            input(type="password", name="password2", placehoder="Verify Password")
+            input(type="submit", value = "Join Now")
+        include partials/socialLogin
