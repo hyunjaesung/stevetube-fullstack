@@ -1,6 +1,9 @@
-export const home = (req, res) => res.render("home", { pageTitle: "Home" });
-//export const videos = (req, res) =>
-// res.render("videos", { pageTitle: "Videos" });
+import { videos } from "../db";
+
+export const home = (req, res) => {
+  res.render("home", { pageTitle: "Home", videos: videos });
+}; // 그냥 videos만 적어도됨 변수이름같으면
+
 export const search = (req, res) => {
   const {
     query: { term: searchingBy }
