@@ -1,9 +1,12 @@
 header.header
-    div.header__coloumn
+    .header__coloumn
         a(href=routes.home)
             <i class="fab fa-youtube"></i>
             //- pug 방법으로 표현하면 i.fab.fa-youtube
-    div.header__coloumn
+    .header__coloumn
+        form(action=routes.search , method = "get")
+            input(type="text", placeholder = "Search by term...", name = "term")
+    .header__coloumn
         ul
             li
                 a(href=routes.join) Join
