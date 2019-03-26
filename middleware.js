@@ -1,7 +1,8 @@
 import multer from "multer";
 import routes from "./routes";
 
-export const multerVideo = multer({ dest: "videos/" });
+export const multerVideo = multer({ dest: "uploads/videos/" });
+// /uploads/videos/ 이런식으로 만들면 uploads 폴더가 이미 있는줄알고 폴더생성안함
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "SteveTube";
