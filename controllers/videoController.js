@@ -43,8 +43,20 @@ export const postUpload = async (req, res) => {
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
-export const videoDetail = (req, res) =>
-  res.render("videoDetail", { pageTitle: "VideoDetail" });
+export const videoDetail = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    // 몽구스가 id로 DB에서 비디오 찾아줌
+    res.render("videoDetail", { pageTitle: "VideoDetail", video });
+    //탬플릿에 db에서 찾아낸 video 전달
+  } catch (error) {
+    redirect(routes.home);
+  }
+};
+
 export const editVideo = (req, res) =>
   res.render("editVideo", { pageTitle: "EditVideo" });
 export const deleteVideo = (req, res) =>
