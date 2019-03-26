@@ -3,7 +3,7 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({ _id: -1 });
     // await 는 async 있어야 쓸수있음, model 안에 여러옵션있음 Find 블라블라
     res.render("home", { pageTitle: "Home", videos: videos });
   } catch (error) {
@@ -12,11 +12,22 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const {
     query: { term: searchingBy }
   } = req;
-  //옛날 방식 const searchingBy = req.query.term;
+
+  let videos = [];
+
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" }
+    });
+    // mongoose에서 제공하는 regular expression, options i 는 insensitive의미, 대소문자구분안함
+    //title : searchingBy 라고 쓰면 정확히 같은 것 만찾음
+  } catch (error) {
+    console.log(error);
+  }
 
   res.render("search", {
     pageTitle: "Search",
