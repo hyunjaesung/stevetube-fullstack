@@ -49,4 +49,5 @@ typings/
 .cache
 dist
 
+videos/
 package-lock.json
