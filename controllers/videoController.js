@@ -50,14 +50,53 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id);
     // 몽구스가 id로 DB에서 비디오 찾아줌
-    res.render("videoDetail", { pageTitle: "VideoDetail", video });
+    res.render("videoDetail", {
+      pageTitle: `${video.title}`,
+      video
+    });
     //탬플릿에 db에서 찾아낸 video 전달
   } catch (error) {
     redirect(routes.home);
   }
 };
 
-export const editVideo = (req, res) =>
-  res.render("editVideo", { pageTitle: "EditVideo" });
-export const deleteVideo = (req, res) =>
-  res.render("deleteVideo", { pageTitle: "DeleteVideo" });
+export const getEditVideo = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+
+  try {
+    const video = await Video.findById(id);
+    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+export const postEditVideo = async (req, res) => {
+  const {
+    params: { id },
+    body: { title, description }
+  } = req;
+  // 폼에서 포스트로 리퀘스트된것들
+  try {
+    await Video.findOneAndUpdate({ _id: id }, { title, description });
+    // 업데이트하면 끝이라서 변수값 저장안함
+    // 몽구스가 같은 변수이름 찾아서 넣어줌, 몽구스에서는 id가 _id 따로 넣어줘야되는군
+
+    res.redirect(routes.videoDetail(id));
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+export const deleteVideo = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+
+  try {
+    await Video.findOneAndRemove({ _id: id });
+  } catch (error) {}
+  res.redirect(routes.home);
+};
