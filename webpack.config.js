@@ -10,9 +10,18 @@ const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_DIR = path.join(__dirname, "static");
 
 const config = {
-  entry: ENTRY_FILE,
+  entry: ["@babel/polyfill", ENTRY_FILE],
   module: {
     rules: [
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
+      },
+
       // .scss 파일을 찾고 scss를 css로 바꾸고
       // 그 css의 텍스트를 추출하고 추출된 css를 하나의 파일로 만듬
       {

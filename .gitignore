@@ -52,3 +52,4 @@ dist
 videos/
 package-lock.json
 uploads/
+static

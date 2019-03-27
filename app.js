@@ -17,6 +17,8 @@ app.set("view engine", "pug");
 app.use("/uploads", express.static("uploads"));
 // /uploads 경로 에 간다면 "uploads"라는 directory에서 file을 전달
 
+app.use("/static", express.static("static"));
+
 app.use(cookieParser());
 app.use(bodyParser.json()); // 옵션있음, 어떤 방식으로 다룰지
 app.use(bodyParser.urlencoded({ extended: true }));
