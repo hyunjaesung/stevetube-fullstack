@@ -24,7 +24,7 @@ app.use(morgan("dev")); // 옵션있음
 
 app.use(localsMiddleware);
 
-app.use("/", globalRouter); //글로벌 라우터 /join /login /home /search 등을 다룸
+app.use("/", globalRouter); // 글로벌 라우터 /join /login /home /search 등을 다룸
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 
