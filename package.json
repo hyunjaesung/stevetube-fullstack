@@ -7,18 +7,28 @@
     "@babel/core": "^7.1.5",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.5",
+    "autoprefixer": "^9.5.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
+    "css-loader": "^2.1.1",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "helmet": "^3.16.0",
     "mongoose": "^5.4.19",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
-    "pug": "^2.0.3"
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
+    "pug": "^2.0.3",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node init.js --delay 2"
+    "dev:server": "nodemon --exec babel-node init.js --delay 2",
+    "dev:assets": "webpack -w --mode=development",
+    "build:assets": "webpack -w --mode=production"
   },
   "devDependencies": {
     "eslint": "^5.15.3",

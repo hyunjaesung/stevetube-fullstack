@@ -8,7 +8,7 @@ export const postJoin = (req, res) => {
   const {
     body: { name, email, password, password2 }
   } = req; // ES6 방식
-  if (password != password2) {
+  if (password !== password2) {
     res.status(400); // Bad request 라는 상태를 보내면 크롬도 저장할지 안물어봄
     res.render("join", { pageTitle: "Join" });
   } else {

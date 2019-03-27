@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
+
 dotenv.config(); // 자동으로 .env파일의 자료를 가져와서 process.env.key에 저장해줌
 
 mongoose.connect(process.env.MONGO_URL, {

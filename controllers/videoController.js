@@ -6,7 +6,7 @@ export const home = async (req, res) => {
     const videos = await Video.find({}).sort({ _id: -1 });
     // await 는 async 있어야 쓸수있음, model 안에 여러옵션있음 Find 블라블라
 
-    res.render("home", { pageTitle: "Home", videos: videos });
+    res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
     res.render("home", { pageTitle: "Home", videos: [] });
@@ -32,8 +32,8 @@ export const search = async (req, res) => {
 
   res.render("search", {
     pageTitle: "Search",
-    searchingBy: searchingBy,
-    videos: videos
+    searchingBy,
+    videos
   });
 };
 export const getUpload = (req, res) =>
@@ -109,6 +109,8 @@ export const deleteVideo = async (req, res) => {
 
   try {
     await Video.findOneAndRemove({ _id: id });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   res.redirect(routes.home);
 };
