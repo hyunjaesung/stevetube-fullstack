@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
 import session from "express-session";
+import MongoStore from "connect-mongo";
+import mongoose from "mongoose";
 import { localsMiddleware } from "./middleware";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -14,6 +16,8 @@ import routes from "./routes";
 import "./passport";
 
 const app = express();
+
+const CookieStore = MongoStore(session);
 
 app.use(helmet());
 app.set("view engine", "pug");
@@ -32,7 +36,9 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     // 아무거나 넣어도됨 이걸 기반으로 암호화
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection })
+    // 몽구스가 저장소를 DB에 연결시켜줌
   })
 );
 
