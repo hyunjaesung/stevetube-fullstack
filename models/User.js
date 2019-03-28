@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
+
 // username field 에는 뭐든 올수있는데 email이 유용
 
 const model = mongoose.model("User", UserSchema);

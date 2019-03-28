@@ -7,10 +7,7 @@ export const multerVideo = multer({ dest: "uploads/videos/" });
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "SteveTube";
   res.locals.routes = routes;
-  res.locals.user = {
-    isAuthenticated: false,
-    id: 1
-  };
+  res.locals.user = req.user || {};
   next();
 };
 
