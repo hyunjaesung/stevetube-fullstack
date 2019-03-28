@@ -4,9 +4,9 @@ block content
     .form-container
         form(action = routes.postJoin, method = "post")
             //- 비밀로 두기 위해 post
-            input(type="text", name="name", placehoder ="Full Name",require = true)
-            input(type="email", name="email", placehoder="Email",require = true)
-            input(type="password", name="password", placehoder="Password",require = true)
-            input(type="password", name="password2", placehoder="Verify Password",require = true)
+            input(type="text", name="name", placeholder ="Full Name",require = true)
+            input(type="email", name="email", placeholder="Email",require = true)
+            input(type="password", name="password", placeholder="Password",require = true)
+            input(type="password", name="password2", placeholder="Verify Password",require = true)
             input(type="submit", value = "Join Now")
         include partials/socialLogin
