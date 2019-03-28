@@ -1,10 +1,11 @@
 import routes from "../routes";
+import User from "../models/User";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
 
-export const postJoin = (req, res) => {
+export const postJoin = async (req, res) => {
   const {
     body: { name, email, password, password2 }
   } = req; // ES6 방식
@@ -12,9 +13,13 @@ export const postJoin = (req, res) => {
     res.status(400); // Bad request 라는 상태를 보내면 크롬도 저장할지 안물어봄
     res.render("join", { pageTitle: "Join" });
   } else {
-    // 성공
-    // To-do : register user
-    // To-do : log user in
+    try {
+      const user = await User.create({ name, email }); // db모델 데이터 만들고
+      await User.register(user, password); // db에 유저 정보 등록
+      // User 모델에 이미 인증도와주는 passport plugin이 등록되어있음
+    } catch (error) {
+      console.log(error);
+    }
     res.redirect(routes.home); // 다시 홈으로 보내기
   }
 };
