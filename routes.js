@@ -14,6 +14,7 @@ const USER_DETAIL = "/:id";
 // 이리쓰면 나중에 express가 :id부분이 바뀌는숫자인거 알아서 users/숫자 이렇게 쓸수있음
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
 
 // Videos
 
@@ -68,7 +69,8 @@ export const routes = {
     }
   },
   github: GITHUB,
-  githubCallback: GITHUB_CALLBACK
+  githubCallback: GITHUB_CALLBACK,
+  me: ME
 };
 
 export default routes;
