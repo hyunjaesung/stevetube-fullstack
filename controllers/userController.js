@@ -127,7 +127,7 @@ export const userDetail = async (req, res) => {
   }
 };
 
-export const editProfile = (req, res) =>
+export const getEditProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "EditProfile" });
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "ChangePassword" });
