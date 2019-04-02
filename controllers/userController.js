@@ -27,8 +27,9 @@ export const postJoin = async (req, res, next) => {
   }
 };
 
-export const getLogin = (req, res) =>
+export const getLogin = (req, res) => {
   res.render("login", { pageTitle: "Login" });
+};
 
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
@@ -130,22 +131,26 @@ export const userDetail = async (req, res) => {
 export const getEditProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "EditProfile" });
 
-export const postEditProfile = (req, res) => {
-  res.redirect(routes.home);
-  // const {
-  //   body: { name, email },
-  //   file
-  // } = req;
-  // try {
-  //   await User.findByIdAndUpdate(req.user.id, {
-  //     name,
-  //     email,
-  //     avatarUrl: file ? file.path : req.user.avatarUrl
-  //   });
-  //   res.redirect(routes.me);
-  // } catch (error) {
-  //   res.render("editProfile", { pageTitle: "Edit Profile" });
-  // }
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email },
+    file
+  } = req;
+  try {
+    await User.findByIdAndUpdate(req.user._id, {
+      // DB바꾸기
+      name,
+      email,
+      avatarUrl: file ? file.path : req.user.avatarUrl
+    });
+    // req 바꾸기
+    req.user.name = name;
+    req.user.email = email;
+    req.user.avatarUrl = file ? file.path : req.user.avatarUrl;
+    res.redirect(routes.me);
+  } catch (error) {
+    res.redirect(routes.editProfile);
+  }
 };
 
 export const changePassword = (req, res) =>

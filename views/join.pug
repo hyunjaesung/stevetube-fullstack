@@ -2,7 +2,7 @@ extends layouts/main.pug
 
 block content
     .form-container
-        form(action = routes.postJoin, method = "post")
+        form(action = routes.join, method = "post")
             //- 비밀로 두기 위해 post
             input(type="text", name="name", placeholder ="Full Name",require = true)
             input(type="email", name="email", placeholder="Email",require = true)

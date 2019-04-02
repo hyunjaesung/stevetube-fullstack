@@ -11,6 +11,13 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 
+UserSchema.statics.serializeUser = () => (user, cb) => cb(null, user.id);
+
+UserSchema.statics.deserializeUser = function() {
+  const self = this;
+  return (id, cb) => self.findById(id, cb);
+};
+
 // username field 에는 뭐든 올수있는데 email이 유용
 
 const model = mongoose.model("User", UserSchema);

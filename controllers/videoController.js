@@ -5,7 +5,6 @@ export const home = async (req, res) => {
   try {
     const videos = await Video.find({}).sort({ _id: -1 });
     // await 는 async 있어야 쓸수있음, model 안에 여러옵션있음 Find 블라블라
-
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
