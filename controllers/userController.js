@@ -111,7 +111,7 @@ export const logout = (req, res) => {
 };
 
 export const getMe = (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   res.render("userDetail", { pageTitle: "UserDetail", user: req.user });
 };
 
@@ -153,5 +153,36 @@ export const postEditProfile = async (req, res) => {
   }
 };
 
-export const changePassword = (req, res) =>
+export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "ChangePassword" });
+
+export const postChangePassword = async (req, res) => {
+  const {
+    body: { oldPassword, newPassword, newPassword1 }
+  } = req;
+  console.log("fnc");
+  console.log(oldPassword, newPassword, newPassword1);
+  try {
+    if (newPassword !== newPassword1) {
+      res.status(400); // 크롬이 비밀번호 업데이트해! 못하게하기
+      res.redirect(`/users/${routes.changePassword}`);
+      return;
+    }
+    console.log("changecomplete");
+    // await req.user.changePassword(oldPassword, newPassword);
+    // function 없다는 에러가 있음
+    const user = await User.findOne({
+      email: req.user.email
+    });
+    console.log(req.user);
+    await user.setPassword(newPassword);
+    await user.save();
+    // req.login(updatedUser);
+
+    res.redirect(routes.me);
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+    res.redirect(`/users/${routes.changePassword}`);
+  }
+};
