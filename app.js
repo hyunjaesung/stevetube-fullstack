@@ -12,7 +12,7 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
-
+import apiRouter from "./routers/apiRouter";
 import "./passport";
 
 const app = express();
@@ -53,5 +53,6 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter); // 글로벌 라우터 /join /login /home /search 등을 다룸
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app; // 누군가 내 파일을 불러오면 이 object를 주겠다는의미
