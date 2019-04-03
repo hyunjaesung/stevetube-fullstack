@@ -121,7 +121,9 @@ export const userDetail = async (req, res) => {
     params: { id }
   } = req; // url 에 있는 id
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("videos");
+    // videos 배열인거 몽구스가 자동으로 앎
+    console.log(user);
     res.render("userDetail", { pageTitle: "UserDetail", user });
   } catch (error) {
     res.redirect(routes.home);

@@ -1,6 +1,5 @@
 import routes from "../routes";
 import Video from "../models/Video";
-import User from "../models/User";
 
 export const home = async (req, res) => {
   try {
@@ -65,7 +64,7 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id).populate("creator");
     // populate는 type이 object id 일때만 불러올수 있음
-    console.log(video);
+    // console.log(video);
     // 몽구스가 id로 DB에서 비디오 찾아줌
     res.render("videoDetail", {
       pageTitle: `${video.title}`,
@@ -84,7 +83,11 @@ export const getEditVideo = async (req, res) => {
 
   try {
     const video = await Video.findById(id);
-    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    if (video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -98,9 +101,6 @@ export const postEditVideo = async (req, res) => {
   // 폼에서 포스트로 리퀘스트된것들
   try {
     await Video.findOneAndUpdate({ _id: id }, { title, description });
-    // 업데이트하면 끝이라서 변수값 저장안함
-    // 몽구스가 같은 변수이름 찾아서 넣어줌, 몽구스에서는 id가 _id 따로 넣어줘야되는군
-
     res.redirect(routes.videoDetail(id));
   } catch (error) {
     res.redirect(routes.home);
@@ -111,9 +111,13 @@ export const deleteVideo = async (req, res) => {
   const {
     params: { id }
   } = req;
-
   try {
-    await Video.findOneAndRemove({ _id: id });
+    const video = await Video.findById(id);
+    if (video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      await Video.findOneAndRemove({ _id: id });
+    }
   } catch (error) {
     console.log(error);
   }

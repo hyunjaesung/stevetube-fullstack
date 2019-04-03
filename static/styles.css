@@ -346,6 +346,8 @@ input[type="submit"] {
       font-size: 14px; }
     .video-detail__container .video__info .video__description {
       font-size: 16px; }
+    .video-detail__container .video__info .video__author a {
+      color: #3498db; }
   .video-detail__container .video__comments {
     margin-top: 25px; }
     .video-detail__container .video__comments .video__comment-number {
