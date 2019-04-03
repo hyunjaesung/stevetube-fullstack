@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import User from "../models/User";
 
 export const home = async (req, res) => {
   try {
@@ -48,9 +49,12 @@ export const postUpload = async (req, res) => {
     // 스키마 따라서 넣어서 db data생성
     fileUrl: path,
     title,
-    description
+    description,
+    creator: req.user.id
   });
-  console.log(newVideo);
+
+  req.user.videos.push(newVideo.id);
+  req.user.save();
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
@@ -59,7 +63,9 @@ export const videoDetail = async (req, res) => {
     params: { id }
   } = req;
   try {
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("creator");
+    // populate는 type이 object id 일때만 불러올수 있음
+    console.log(video);
     // 몽구스가 id로 DB에서 비디오 찾아줌
     res.render("videoDetail", {
       pageTitle: `${video.title}`,

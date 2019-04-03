@@ -6,7 +6,9 @@ const UserSchema = new mongoose.Schema({
   email: String, // 여러모듈로 가입해도 알수있게
   avatarUrl: String, // fileUrl이랑 같은 방식으로 저장됨
   facebookId: Number,
-  githubId: Number
+  githubId: Number,
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }]
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });

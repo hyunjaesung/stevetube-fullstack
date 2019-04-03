@@ -15,7 +15,11 @@ const VideoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }] // array로 저장
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }], // array로 저장
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 const model = mongoose.model("Video", VideoSchema);

@@ -137,16 +137,16 @@ export const postEditProfile = async (req, res) => {
     file
   } = req;
   try {
-    await User.findByIdAndUpdate(req.user._id, {
+    await User.findByIdAndUpdate(req.user.id, {
       // DB바꾸기
       name,
       email,
       avatarUrl: file ? file.path : req.user.avatarUrl
     });
     // req 바꾸기
-    req.user.name = name;
-    req.user.email = email;
-    req.user.avatarUrl = file ? file.path : req.user.avatarUrl;
+    // req.user.name = name;
+    // req.user.email = email;
+    //  req.user.avatarUrl = file ? file.path : req.user.avatarUrl;
     res.redirect(routes.me);
   } catch (error) {
     res.redirect(routes.editProfile);
