@@ -6,7 +6,9 @@ mixin videoPlayer(video={})
                 span#jsVolumeButton
                     <i class="fas fa-volume-up"></i>
                 span
-                    |00:00 / 10:00
+                    span#currentTime 00:00:00 
+                    |/
+                    span#totalTime 00:00:00
             .videoPlayer__column
                 span#jsPlayButton
                     <i class="fas fa-play"></i>

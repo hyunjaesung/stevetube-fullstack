@@ -3,6 +3,8 @@ const videoPlayer = videoContainer.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
 const volumeBtn = document.getElementById("jsVolumeButton");
 const fullScreenBtn = document.getElementById("jsFullScreen");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -57,11 +59,44 @@ function exitFullScreen() {
   fullScreenBtn.addEventListener("click", goFullScreen);
 }
 
+const formatDate = seconds => {
+  const secondsNumber = parseInt(seconds, 10);
+  let hours = Math.floor(secondsNumber / 3600);
+  let minutes = Math.floor((secondsNumber - hours * 3600) / 60);
+  let totalSeconds = secondsNumber - hours * 3600 - minutes * 60;
+
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (seconds < 10) {
+    totalSeconds = `0${totalSeconds}`;
+  }
+  return `${hours}:${minutes}:${totalSeconds}`;
+};
+
+function getCurrentTime() {
+  currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+}
+
+function setTotalTime() {
+  const totalTimeString = formatDate(videoPlayer.duration);
+  // The HTMLMediaElement.duration property gives the length of the media in seconds,
+  // or zero if no media data is available.
+  totalTime.innerHTML = totalTimeString;
+  setInterval(getCurrentTime, 1000); // 계속 호출하면서 함수 호출 시간 갱신
+}
+
 function init() {
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   // 풀스크린 체크해주는 함수가 없어서 이벤트리스너를 바꾸는 방식으로해야됨
   fullScreenBtn.addEventListener("click", goFullScreen);
+  videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  // 비디오가 메타데이터를 로드할때까지 기다려야함
+  // 그냥 함수바로 쓰면 메타 데이터 로드 전이라서 계산이 안되서 NAN뜸
 }
 
 // js파일이 항상 모든페이지 footer아래 include되는걸 명심!
