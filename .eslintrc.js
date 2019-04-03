@@ -3,5 +3,6 @@ module.exports = {
   rules: {
     "no-console": "off",
     "import/no-named-as-default": "off"
-  }
+  },
+  env: { browser: true }
 };
