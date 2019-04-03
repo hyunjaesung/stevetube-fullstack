@@ -28,7 +28,15 @@ function handleVolumeClick() {
 function goFullScreen() {
   // 그냥 함수는 지원을안해서 webkit(크롬엔진)쓰고 쓰라고되어있음
   // 익스플로러는 ms
-  videoContainer.webkitRequestFullscreen();
+  if (videoContainer.requestFullscreen) {
+    videoContainer.requestFullscreen();
+  } else if (videoContainer.mozRequestFullScreen) {
+    videoContainer.mozRequestFullScreen();
+  } else if (videoContainer.webkitRequestFullscreen) {
+    videoContainer.webkitRequestFullscreen();
+  } else if (videoContainer.msRequestFullscreen) {
+    videoContainer.msRequestFullscreen();
+  }
   fullScreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
   fullScreenBtn.removeEventListener("click", goFullScreen); // 이벤트 리스너 삭제
   fullScreenBtn.addEventListener("click", exitFullScreen); // 이벤트 리스너 추가
@@ -36,7 +44,15 @@ function goFullScreen() {
 
 function exitFullScreen() {
   fullScreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-  document.webkitExitFullscreen();
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
   fullScreenBtn.removeEventListener("click", exitFullScreen);
   fullScreenBtn.addEventListener("click", goFullScreen);
 }
