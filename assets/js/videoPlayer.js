@@ -5,6 +5,7 @@ const volumeBtn = document.getElementById("jsVolumeButton");
 const fullScreenBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
+const volumeRange = document.getElementById("jsVolume");
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -21,7 +22,9 @@ function handleVolumeClick() {
     // 이건 readonly 아님
     videoPlayer.muted = false;
     volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volumeRange.value = videoPlayer.volume;
   } else {
+    volumeRange.value = 0;
     videoPlayer.muted = true;
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
@@ -78,7 +81,7 @@ const formatDate = seconds => {
 };
 
 function getCurrentTime() {
-  currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
 function setTotalTime() {
@@ -89,7 +92,27 @@ function setTotalTime() {
   setInterval(getCurrentTime, 1000); // 계속 호출하면서 함수 호출 시간 갱신
 }
 
+function handleEnded() {
+  videoPlayer.currentTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
+function handleDrag(event) {
+  const {
+    target: { value }
+  } = event;
+  videoPlayer.volume = value;
+  if (value >= 0.6) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else if (value >= 0.3) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+  } else {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  }
+}
+
 function init() {
+  videoPlayer.volume = 0.5;
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   // 풀스크린 체크해주는 함수가 없어서 이벤트리스너를 바꾸는 방식으로해야됨
@@ -97,6 +120,8 @@ function init() {
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   // 비디오가 메타데이터를 로드할때까지 기다려야함
   // 그냥 함수바로 쓰면 메타 데이터 로드 전이라서 계산이 안되서 NAN뜸
+  videoPlayer.addEventListener("ended", handleEnded);
+  volumeRange.addEventListener("input", handleDrag);
 }
 
 // js파일이 항상 모든페이지 footer아래 include되는걸 명심!
