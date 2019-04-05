@@ -1,15 +1,25 @@
 import axios from "axios";
 
 const addCommentForm = document.getElementById("jsAddComment");
+const commentList = document.getElementById("jsCommentList");
+const commentNumber = document.getElementById("jsCommentNumber");
+
+const increaseNumber = () => {
+  commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+  // 코멘트 수가 문자열이라서 변환필요
+};
+
+const addComment = comment => {
+  const li = document.createElement("li");
+  const span = document.createElement("span");
+  span.innerHTML = comment;
+  li.appendChild(span);
+  commentList.prepend(li); // prepend는 위에 붙게함
+  increaseNumber();
+};
 
 const sendComment = async comment => {
   const videoId = window.location.href.split("/videos/")[1];
-  // const data = { comment };
-
-  // const response = await fetch(`/api/${videoId}/comment`, {
-  // method: "POST",
-  //  body: comment
-  // });
 
   const response = await axios({
     url: `/api/${videoId}/comment`,
@@ -18,7 +28,10 @@ const sendComment = async comment => {
       comment
     }
   });
-  console.log(response);
+  if (response.status === 200) {
+    // db저장 성공했을시
+    addComment(comment);
+  }
 };
 
 const handleSubmit = event => {

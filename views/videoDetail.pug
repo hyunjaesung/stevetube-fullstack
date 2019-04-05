@@ -3,9 +3,11 @@ include mixins/videoPlayer
 
 block content
     .video-detail__container
-        +videoPlayer({src:video.fileUrl})
+        +videoPlayer({
+            src:video.fileUrl
+        })
         .video__info
-            if loggedUser && (video.creator.id === loggedUser.id)
+            if loggedUser && video.creator.id === loggedUser.id
                 a(href=routes.editVideo(video.id))
                     button Edit video
             h5.video__title=video.title
@@ -18,15 +20,19 @@ block content
                 |Uploaded by 
                 a(href=routes.userDetail(video.creator.id))=video.creator.name
         .video__comments
-            if loggedUser
-                if video.comments.length === 1
-                    span.video__comment-number 1 comment
-                else
-                    span.video__comment-number #{video.comments.length} comments
-                form.add__comment#jsAddComment
-                    input(type="text", placeholder="Add a comment", name="comment")
-                ul.video__comments-list
-                    each comment in video.comments
-                        span=comment.text 
+            if video.comments.length === 1
+                span.video__comment-number
+                    span#jsCommentNumber 1
+                    |  comment
+            else
+                span.video__comment-number
+                    span#jsCommentNumber=video.comments.length
+                    |  comments
+            form.add__comment#jsAddComment
+                input(type="text", placeholder="Add a comment")
+            ul.video__comments-list#jsCommentList
+                each comment in video.comments.reverse()
+                    li
+                        span=comment.text
                         //- DB에서 불러온 comments 들 소환
                         //- video 오브젝트는 렌더하면서 전해줌
