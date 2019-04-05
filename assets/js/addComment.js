@@ -12,10 +12,13 @@ const increaseNumber = () => {
 const addComment = comment => {
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const delbtn = document.createElement("button");
+  delbtn.className = "video__comment-delete";
+  delbtn.innerText = "X";
   span.innerHTML = comment;
   li.appendChild(span);
+  li.appendChild(delbtn);
   commentList.prepend(li); // prepend는 위에 붙게함
-  increaseNumber();
 };
 
 const sendComment = async comment => {
@@ -31,6 +34,7 @@ const sendComment = async comment => {
   if (response.status === 200) {
     // db저장 성공했을시
     addComment(comment);
+    increaseNumber();
   }
 };
 

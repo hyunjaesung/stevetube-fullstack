@@ -150,7 +150,6 @@ export const postRegisterView = async (req, res) => {
 // Add Comment
 
 export const postAddComment = async (req, res) => {
-  console.dir(req.body);
   const {
     params: { id },
     body: { comment },
@@ -166,6 +165,32 @@ export const postAddComment = async (req, res) => {
     });
     video.comments.push(newComment.id); // 비디오 DB에 comment id 넣어줌
     video.save();
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+// Delete Comment on DB
+
+export const postDeleteComment = async (req, res) => {
+  // 프론트앤드에서 전달 받은 정보
+  const {
+    body: { commentId },
+    user
+  } = req;
+
+  try {
+    const deleteComment = await Comment.findOne({ _id: commentId });
+
+    if (String(deleteComment.creator) !== user.id) {
+      res.status(400);
+    } else {
+      // 삭제
+      await Comment.findByIdAndRemove({ _id: commentId });
+    }
+    res.status(200);
   } catch (error) {
     res.status(400);
   } finally {

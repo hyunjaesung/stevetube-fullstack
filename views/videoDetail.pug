@@ -29,10 +29,14 @@ block content
                     span#jsCommentNumber=video.comments.length
                     |  comments
             form.add__comment#jsAddComment
-                input(type="text", placeholder="Add a comment")
+                if loggedUser
+                    input(type="text", placeholder="Add a comment")
             ul.video__comments-list#jsCommentList
                 each comment in video.comments.reverse()
                     li
                         span=comment.text
+                        if loggedUser && `${comment.creator}` === loggedUser.id
+                            button.video__comment-delete.jsDeleteComment(value=comment.id) X
+
                         //- DB에서 불러온 comments 들 소환
                         //- video 오브젝트는 렌더하면서 전해줌
