@@ -7,6 +7,13 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 
+const registerView = () => {
+  console.log("registerview");
+  const videoId = window.location.href.split("/videos/")[1];
+  console.log(videoId);
+  fetch(`/api/${videoId}/view`, { method: "POST" });
+};
+
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -93,6 +100,8 @@ function setTotalTime() {
 }
 
 function handleEnded() {
+  console.log("videoended");
+  // registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
@@ -113,6 +122,7 @@ function handleDrag(event) {
 
 function init() {
   videoPlayer.volume = 0.5;
+  registerView();
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   // 풀스크린 체크해주는 함수가 없어서 이벤트리스너를 바꾸는 방식으로해야됨
