@@ -17,9 +17,16 @@ block content
             .video__author
                 |Uploaded by 
                 a(href=routes.userDetail(video.creator.id))=video.creator.name
-
         .video__comments
-            if video.comments.length === 1
-                span.video__comment-number 1 comment
-            else
-                span.video__comment-number #{video.comments.length} comments
+            if loggedUser
+                if video.comments.length === 1
+                    span.video__comment-number 1 comment
+                else
+                    span.video__comment-number #{video.comments.length} comments
+                form.add__comment#jsAddComment
+                    input(type="text", placeholder="Add a comment", name="comment")
+                ul.video__comments-list
+                    each comment in video.comments
+                        span=comment.text 
+                        //- DB에서 불러온 comments 들 소환
+                        //- video 오브젝트는 렌더하면서 전해줌

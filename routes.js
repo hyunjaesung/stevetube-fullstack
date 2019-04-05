@@ -38,6 +38,7 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 // 그냥 서버랑 통신하기위한 url 유저가 접근할 수 없음. 렌더도 불가능
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
+const ADD_COMMENT = "/:id/comment";
 
 export const routes = {
   home: HOME,
@@ -80,7 +81,8 @@ export const routes = {
   facebook: FB,
   facebookCallback: FB_CALLBACK,
   api: API,
-  registerView: REGISTER_VIEW
+  registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT
 };
 
 export default routes;

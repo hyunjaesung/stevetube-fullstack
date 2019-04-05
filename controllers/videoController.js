@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   try {
@@ -62,7 +63,9 @@ export const videoDetail = async (req, res) => {
     params: { id }
   } = req;
   try {
-    const video = await Video.findById(id).populate("creator");
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
     // populate는 type이 object id 일때만 불러올수 있음
     // console.log(video);
     // 몽구스가 id로 DB에서 비디오 찾아줌
@@ -140,6 +143,32 @@ export const postRegisterView = async (req, res) => {
     res.end();
   } finally {
     // 마지막은 무조건 이렇게 의미
+    res.end();
+  }
+};
+
+// Add Comment
+
+export const postAddComment = async (req, res) => {
+  console.dir(req.body);
+  const {
+    params: { id },
+    body: { comment },
+    user
+  } = req; // 인풋창에 서브밋된 정보
+
+  try {
+    const video = await Video.findById(id); // video db 소환
+    const newComment = await Comment.create({
+      // comment db data 만들기
+      text: comment,
+      creator: user.id
+    });
+    video.comments.push(newComment.id); // 비디오 DB에 comment id 넣어줌
+    video.save();
+  } catch (error) {
+    res.status(400);
+  } finally {
     res.end();
   }
 };
