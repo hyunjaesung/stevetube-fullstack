@@ -42,12 +42,12 @@ export const getUpload = (req, res) =>
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path } // 파일에서 path 받아오기
+    file: { location } // 파일에서 path 받아오기
   } = req;
 
   const newVideo = await Video.create({
     // 스키마 따라서 넣어서 db data생성
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id

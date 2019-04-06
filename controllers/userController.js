@@ -143,7 +143,7 @@ export const postEditProfile = async (req, res) => {
       // DB바꾸기
       name,
       email,
-      avatarUrl: file ? file.path : req.user.avatarUrl
+      avatarUrl: file ? file.location : req.user.avatarUrl
     });
     // req 바꾸기
     // req.user.name = name;
