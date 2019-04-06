@@ -86,10 +86,13 @@ export const getEditVideo = async (req, res) => {
 
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
-      throw Error();
-    } else {
+    console.log(video.creator);
+    console.log(req.user.id);
+    if (video.creator == req.user.id) {
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    } else {
+      console.log("id authentication error");
+      throw Error();
     }
   } catch (error) {
     res.redirect(routes.home);
@@ -116,10 +119,10 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
-      throw Error();
-    } else {
+    if (video.creator == req.user.id) {
       await Video.findOneAndRemove({ _id: id });
+    } else {
+      throw Error();
     }
   } catch (error) {
     console.log(error);
