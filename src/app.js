@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import express from "express";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -5,6 +6,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
 import session from "express-session";
+import path from "path";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import { localsMiddleware } from "./middleware";
@@ -21,11 +23,12 @@ const CookieStore = MongoStore(session);
 
 app.use(helmet());
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views")); // current folder 가 아닌곳으로 연결
 
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads")); // AWS에 올림
 // /uploads 경로 에 간다면 "uploads"라는 directory에서 file을 전달
 
-app.use("/static", express.static("static"));
+app.use("/static", express.static(path.join(__dirname, "static"))); // current folder 가 아닌곳으로 연결
 
 app.use(cookieParser());
 app.use(bodyParser.json()); // 옵션있음, 어떤 방식으로 다룰지

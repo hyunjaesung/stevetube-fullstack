@@ -4,7 +4,8 @@
   "description": "Cloning Youtube with Vanilla and NodeJS",
   "author": "Steve",
   "dependencies": {
-    "@babel/core": "^7.1.5",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
     "@babel/node": "^7.0.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/preset-env": "^7.1.5",
@@ -40,17 +41,23 @@
     "webpack-cli": "^3.3.0"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore 'static'",
-    "dev:assets": "webpack -w --mode=development",
-    "build:assets": "webpack -w --mode=production",
-    "tunnel": "lt --port 4000"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build",
+    "copyAll": "xcopy .\\src\\static .\\build\\static\\ /s /y && xcopy .\\src\\views .\\build\\views\\ /s /y",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rd /s /q build",
+    "tunnel": "lt --port 4000",
+    "start": "node build/init.js"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "nodemon": "^1.18.6",
     "prettier": "^1.16.4"
   }
