@@ -2,13 +2,13 @@
   
   Cloning Youtube with VanilaJS and NodeJS  
   
-* #### Total Elapsed Time : 3 weeks  
+#### Total Elapsed Time : 3 weeks  
   
-* #### Stack   
+#### Stack   
   * **BackEnd** : NodeJS, ExpressJS, MongoDB, Webpack, babel, pug, nodemon, passport, axios, multer, AWS S3, MongoAtlas, Heroku  
   * **FrontEnd** : Sass, VanilaJS  
   
-* #### Pages
+#### Pages
   
   * [x] Home  
   * [x] Join  
