@@ -22,9 +22,8 @@ Cloning Youtube with VanilaJS and NodeJS
 - [x] Video Detail
 - [x] Edit Video
 
-#### DevlopmentLog
+#### [DevlopmentLog](https://hardworkingcoder.wordpress.com/category/youtubeclone/)
 
-- [WholeLog](https://hardworkingcoder.wordpress.com/category/youtubeclone/)
 - [ExpressJS](https://hardworkingcoder.wordpress.com/?s=fullstack+expressjs)
 - [MongoDB](https://hardworkingcoder.wordpress.com/?s=fullstack+mongodb)
 - [Webpack](https://hardworkingcoder.wordpress.com/?s=fullstack+webpack+Styling)
