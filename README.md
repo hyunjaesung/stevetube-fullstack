@@ -26,7 +26,7 @@ Cloning Youtube with VanilaJS and NodeJS
 
 - [ExpressJS](https://hardworkingcoder.wordpress.com/?s=fullstack+expressjs)
 - [MongoDB](https://hardworkingcoder.wordpress.com/?s=fullstack+mongodb)
-- [Webpack](https://hardworkingcoder.wordpress.com/?s=fullstack+webpack+Styling)
-- [passport](https://hardworkingcoder.wordpress.com/?s=fullstack+authenticaition)
+- [Webpack](https://hardworkingcoder.wordpress.com/?s=fullstack+webpack+styling)
+- [passport](https://hardworkingcoder.wordpress.com/?s=fullstack+authentication)
 - [Ajax](https://hardworkingcoder.wordpress.com/?s=fullstack+ajax)
 - [AWS](https://hardworkingcoder.wordpress.com/?s=fullstack+aws)
